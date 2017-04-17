@@ -1,0 +1,67 @@
+
+Language and platform:
+  Build and tested in Python 3.5 in MacOS 10.12.3 and Ubuntu 
+
+Dependences installation:
+  The next extra Python 3 libraries will be required:
+      lxml,
+      requests,
+      bottle,
+      bottledaemon
+  They can be installed, with the following or an equivalent command:
+  
+    pip3 install lxml requests bottle bottledaemon
+    
+  Note:
+    bottledaemon will launch a daemon that we might want to close after running
+    the application with testing purposes.
+
+Execution:
+  python3 StaticWebParser_main.py start
+
+Stop daemon background run:
+  python3 StaticWebParser_main.py stop
+
+  Available in:
+    http://localhost:8080/games
+    http://localhost:8080/games/<TITLE_OF_GAME>
+  Accesssible it (recommended) running:
+      curl -i -H "Accept: application/json" -H "Content-Type: application/json" -X GET [URL]
+      i.e:
+        curl -i -H "Accept: application/json" -H "Content-Type: application/json" -X GET http://localhost:8080/games
+        curl -i -H "Accept: application/json" -H "Content-Type: application/json" -X GET http://localhost:8080/games/nioh
+        curl -i -H "Accept: application/json" -H "Content-Type: application/json" -X GET http://localhost:8080/games/Resident_Evil_7:_biohazard
+
+Unit tests:
+  
+  
+  Execution of first execution:
+    It requires a fist run of the server**, for example:
+    
+        python3 StaticWebParser_tests.py start
+      
+      or:
+        python3 StaticWebParser_main.py start
+        Althought this would work with current real data from Motionlogic, and 
+        it might load new games not considered in the test.
+    After that, we just have to run the tests:
+    
+      python3 StaticWebParser_tests.py
+    
+  Finish test cases execution and finish background daemon:
+    python3 StaticWebParser_tests.py stop
+
+ ** Note:
+    For the first execution, we have to run it a second time to see the test 
+    results. This is because the first execution requires the "start" argument 
+    to start the bottledaemon (inital viersion which is under development). 
+    
+    Unfortunately, this daemon hides all the other std outputs, so, to see the 
+    result of the tests, we have to run the script a second time, without the 
+    start argument. I had no time to fix this issue, I tried checking if the 
+    process was already running, but it does depending on the script PID, so, 
+    once we start the process itself, we cannot make any difference. I tried 
+    also with static variables and decorators, but it was not giving the 
+    results I expected. So, I decided to send it like this.
+    
+    A commercial solution would require some research and it would be fixed.
