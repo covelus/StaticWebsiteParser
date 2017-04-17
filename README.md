@@ -1,2 +1,3 @@
 # StaticWebsiteParser
-Just an example for fun of an static Website parser
+Imagine you want to expose (for personal and private purposes) a REST API, providing JSON information taken from a Website that doesn't provide a Webservice... 
+This is just an example for fun of an specific-HTML-page-dependent static Website parser (you must modify it for each different HTML).
